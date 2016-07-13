@@ -27,60 +27,43 @@ def make_chains(text_string):
     """
 
     chains = {}
-    value = []
 
     #loop over the words in our string
     words = text_string.split()
-    for i in range(len(words)-2): #-2 will stop after Sam I which is the last key we want 
-        print i
-        # word_pair = words[i], words[i+1]
-    
-    #add each word to the empty dictionary (even and odd word bigram)
-    # chains.get(i, 0) + 1 #values as the list of strings following the tuple key 
-    # print chains
-
-    #bigrams will be the keys and the values will be every possible following word 
-        current_key = (words[i], words[i+1]) #would you
-        chosen_word = words[i+2] #could or like
-        # new_key = (words[i+1], words[i+2]) #you could or you like
-
-        chains[current_key] = [chosen_word]
-        # print current_key
-        # print chains
-        # print "added a %s, %s to dict!" % (current_key[0], current_key[1])
-    #print chains # this does not show mulitple values
-    #if key is in dictionary:
-        #append to the current value
-        chains[current_key] = chains.get(current_key, None) + [chosen_word]
-    #else:
-        #append the key to the dictionary with the chosen value
+    for index in range(len(words)-2): #-2 will stop after Sam I which is the last key we want 
+        current_key = (words[index], words[index+1]) #would you
+        chosen_word = words[index+2] #could or like
+        if current_key not in chains:
+            chains[current_key] = [chosen_word]
+        else: #(we havent added this key to the chains yet)
+            chains[current_key] = chains.get(current_key, None) + [chosen_word]
     print chains
-#need .get() to count the instances of the values, if we dont have word pair do blah
-#if we do have word pair, we add current value into key pair (i.e. line 47)
-    #return chains
 
-big_block_of_words = open_and_read_file("green-eggs.txt")
-print make_chains(big_block_of_words) #calling the function within the next function INCEPTION
+input_path = open_and_read_file("green-eggs.txt")
+print make_chains(input_path) #calling the function within the next function INCEPTION
 
-# def make_text(chains):
-#     """Takes dictionary of markov chains; returns random text."""
+def make_text(chains):
+    """Takes dictionary of markov chains; returns random text."""
 
-#     text = ""
+    text = ""
 
-#     # your code goes here
-
-#     return text
+    #take the second word of current_key and append a random word 
+    new_word_pair = chains.keys().append(random.choice(chosen_word))
+    #look for the key made of the tuple in the dictionary 
 
 
-# input_path = "green-eggs.txt"
+    print new_word_pair
 
-# # Open the file and turn it into one long string
-# input_text = open_and_read_file(input_path)
 
-# # Get a Markov chain
-# chains = make_chains(input_text)
+input_path = "green-eggs.txt"
 
-# # Produce random text
-# random_text = make_text(chains)
+# Open the file and turn it into one long string
+input_text = open_and_read_file(input_path)
 
-# print random_text
+# Get a Markov chain
+chains = make_chains(input_text)
+
+# Produce random text
+random_text = make_text(chains)
+
+print random_text
