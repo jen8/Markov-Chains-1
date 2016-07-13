@@ -11,7 +11,7 @@ def open_and_read_file(file_path):
     text_string = open(file_path).read()
     return text_string.rstrip()
 
-print open_and_read_file("green-eggs.txt")
+open_and_read_file("green-eggs.txt")
 
 def make_chains(text_string):
     """Takes input text as string; returns _dictionary_ of markov chains.
@@ -37,10 +37,10 @@ def make_chains(text_string):
             chains[current_key] = [chosen_word]
         else: #(we havent added this key to the chains yet)
             chains[current_key] = chains.get(current_key, None) + [chosen_word]
-    print chains
+    return chains #not print because we cant use the value of chains in the following function
 
-input_path = open_and_read_file("green-eggs.txt")
-print make_chains(input_path) #calling the function within the next function INCEPTION
+# input_path = open_and_read_file("green-eggs.txt")
+# make_chains(input_path) #calling the function within the next function INCEPTION
 
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
@@ -48,11 +48,12 @@ def make_text(chains):
     text = ""
 
     #take the second word of current_key and append a random word 
-    new_word_pair = chains.keys().append(random.choice(chosen_word))
+    #new_word_pair = chains.keys().append(random.choice(chosen_word))
+
     #look for the key made of the tuple in the dictionary 
 
 
-    print new_word_pair
+    return chains
 
 
 input_path = "green-eggs.txt"
